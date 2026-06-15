@@ -424,55 +424,174 @@ export const discoverItems: DiscoverItem[] = [
   {
     id: "d1",
     category: "dining",
-    title: "Penn Dining Services",
-    description: "Understanding your dining plans, Dining Cents, and local swipe locations.",
+    title: "UPenn Dining Services & Plans",
+    description: "First-year dining contracts, Dining Cents, and prime student swipe structures.",
     details: [
-      "1920 Commons: Main dining hall located on Locust Walk, offers buffet and retail options.",
-      "Hill House Dining: Newly renovated first-year dining hall with an open kitchen, salad bar, and allergen-free island.",
-      "Dining Cents ($): Tax-free funds included in meal plans used for purchasing continuous items in campus cafes or retail stores.",
-      "Falk Kosher Dining: High-quality kosher meals available at Steinhardt Hall.",
-      "Guest Swipes: All first-year plans include 10 guest swipes per semester to share with visiting parents or friends."
+      "1920 Commons: Traditional buffet and central dining hall on Locust Walk. Excellent micro-bites and late-night grab-and-go options.",
+      "Hill House Dining: Incredibly popular with first-years. Newly upgraded with open action-cook stations, vast salad bars, and custom allergen-free limits.",
+      "Dining Cents: Tax-free, dollar-for-dollar balances built into meal plans used at on-campus coffee chains, gourmet cafes, and Houston Market.",
+      "Falk Kosher Dining: Superb certified kosher dining and buffet selections at Steinhardt Hall on 39th Street.",
+      "Guest Swipes: General first-year meal plans are packaged with 10 complimentary guest passes. Perfect for Adrian during move-in or family week events!"
     ],
-    linkText: "View Dining Menus"
+    location: "Locust Walk & Hill House sectors",
+    linkText: "View Interactive Menus"
   },
   {
     id: "d2",
     category: "housing",
     title: "First-Year Housing: The Quadrangle",
-    description: "Home of first-year community. Formed of Ware, Fisher-Hassenfeld, and Riepe College Houses.",
+    description: "Logistics and living structures in Ware, Fisher-Hassenfeld, and Riepe College Houses.",
     details: [
-      "Address format: [Student Name], [Room Number], Ware College House, 3700 Spruce Street, Philadelphia, PA 19104-6022.",
-      "Package Delivery: All deliveries (UPS, FedEx, USPS, Amazon) are routed to the Quad Package Room in the lower Quad.",
-      "Laundry: Card/mobile-phone activated laundry facilities located in the basement of each house sector. High-efficiency detergent only.",
-      "Dorm Layout: Rooms feature high ceilings, traditional hardwood style composite flooring, and twin XL bed frames."
+      "Communal Layouts: Featuring traditional gothic architecture, high ceilings, hard-surface flooring, and solid twin XL bed heights.",
+      "Basement Laundry: Mobile-app operated, water-saving washing facilities. Front-load HE soap solutions strongly advised.",
+      "House Staff Teams: Every hall is monitored by a faculty Director, live-in Graduate Associates (GAs), and sophomore/junior Peer Advisors.",
+      "Outlets & Safety: Historic Quad structures have sparse power points. Heavy-duty tri-wire surge protected strips are mandatory."
     ],
-    location: "370 Spruce St"
+    location: "The Quad (Spruce Street Front)",
+    linkText: "Read Quad Living Guidelines"
   },
   {
     id: "d3",
-    category: "resources",
-    title: "First-Year Resource Hub (Houston Hall)",
-    description: "The historical heart of campus activities and centralized freshers help.",
+    category: "pennkey",
+    title: "PennKey Registration & Security",
+    description: "Activating your PennKey ID, accessing Canvas portals, and setting up multi-factor Duo authentication.",
     details: [
-      "NSO Hospitality Booths: Located in Houston Hall lobby during move-in week to retrieve student student IDs, welcome kits, and local transit vouchers.",
-      "Student Health Service (SHS): Primary medical care center for all Penn students, located at 3535 Market Street.",
-      "VPUL (Vice Provost for University Life): Guidance for personal counseling, safety, and multicultural communities.",
-      "Weigle Information Commons (WIC): Located in Van Pelt Library, offers media booths, study rooms, and technical support workshops."
+      "Activation Code: Freshman receive unique setup links via secure email to claims their official user ID and setup security questions.",
+      "Duo Mobile 2FA: Every login to PennInTouch, PennPath, and Canvas requires confirmation on mobile device via DUO app push alerts.",
+      "Authentication Sync: Keep Duo active on a modern backup number. If you change your phone, submit a direct support card to prevent lockouts.",
+      "Troubleshooting Desk: On-campus technical desks are standing by during move-in inside the lobby of Van Pelt Library."
     ],
-    location: "Houston Hall (3417 Spruce St)",
-    linkText: "Explore Campus Resources"
+    location: "Van Pelt Library (Ground Level)",
+    linkText: "Access PennKey Setup Tool"
   },
   {
     id: "d4",
-    category: "safety",
-    title: "Penn Transit & Emergency Services",
-    description: "Essential transportation options and 24/7 campus safety contacts designed to bring peace of mind.",
+    category: "pennpay",
+    title: "PennPay Student Bills & Billing Setup",
+    description: "Enrolling parents as authorized billing managers, direct deposits, and important semester billing schedules.",
     details: [
-      "Penn Walking Escort: Call 215-898-WALK for a physical safety escort on or near campus 24/7.",
-      "Penn Transit Shuttle: Free shuttle bus service operating after 6:00 PM for all students with valid PennID.",
-      "Blue Light Phones: Located throughout campus margins. Pick up to speak directly to Penn Police dispatch.",
-      "Penn Guardian Mobile App: Fast one-touch direct connection to Penn comms dispatcher with GPS-sharing active."
+      "Authorized Payers: Security regulations mandate that Gabby must explicitly add Adrian's email in PennPay to unlock joint billing status.",
+      "Direct Deposit: Link standard client-side bank checks for instantaneous transfer of refunds or university workspace student wages.",
+      "Fall Bill Deadline: General freshman fall installment bills close in mid-July. Unresolved balances are assessed deferred service fees."
     ],
-    location: "Emergency services: 215-573-3333 (or 511 from campus phones)"
+    location: "Franklin Building (3451 Walnut St)",
+    linkText: "Authorize Parents on PennPay"
+  },
+  {
+    id: "d5",
+    category: "orientation",
+    title: "New Student Orientation (NSO) 2026 Mandates",
+    description: "Compulsory freshman welcoming ceremonies, peer workshops, and placement exams.",
+    details: [
+      "Mandatory Convocation: Official freshman welcome with the President at the massive Zellerbach Theatre on August 22 at 7:00 PM.",
+      "Penn Reading Project: Class-wide book assigned for direct round-robin discussions with faculty partners in Ware College House.",
+      "Assessment Deadlines: Standard placements in mathematics, chemistry, and foreign languages must close via Canvas before August courses start."
+    ],
+    location: "Campus-Wide / Annenberg Theatre",
+    linkText: "View Complete NSO Schedule"
+  },
+  {
+    id: "d6",
+    category: "movein",
+    title: "Move-In Logistics & Timeslots",
+    description: "Coordinating move-in time selections, loading permits, and Quad parking maps.",
+    details: [
+      "Assigned Slot: August 21, 2026 beginning at 10:00 AM. Traffic surrounding Spruce is dense; tight compliance is demanded.",
+      "Unloading Zone: 20-minute temporary parking passes will be issued to cars at Ware House gate checkpoints. Staff will assist unloading.",
+      "PennID Verification: Active physical or virtual PennPass must be presented to bypass turnstiles and claim dorm key packets at help desks."
+    ],
+    location: "Ware College House Gate",
+    linkText: "Download Move-In Pass"
+  },
+  {
+    id: "d7",
+    category: "health",
+    title: "Health Services & Vaccine Forms",
+    description: "Immunizations records uploads, SHS doctor locations, and PSIP medical insurance rules.",
+    details: [
+      "SHS Operations: Located at 3535 Market Street, offering complete medical support, emergency triage, and prescription coordination.",
+      "Immunization Uploads: Doctor-signed vaccine files must be processed and verified on the Student Health Portal prior to move-in day.",
+      "Insurance Waivers: PSIP is auto-billed. Submit details of personal health insurance plans online by August 1 to claim the waiving credit."
+    ],
+    location: "Student Health Service (3535 Market St)",
+    linkText: "Submit SHS Health Forms"
+  },
+  {
+    id: "d8",
+    category: "penncard",
+    title: "PennCard Student ID Processing",
+    description: "Generating your physical Penn ID card, remote photo submits, and safe card uses.",
+    details: [
+      "Photo Upload Deadline: Upload high-resolution vertical headshots on Penn's Card Portal before July 10, 2026.",
+      "Retrieval Hub: Unclaimed physical cards are available at Houston Hall NSO Hospitality Booths starting on August 21.",
+      "Dorm Building Gates: Cards are embedded with wireless RFID. Tap entry gates at Ware House and dining doors for quick check-ins."
+    ],
+    location: "Houston Hall (Hospitality Booths)",
+    linkText: "Upload PennCard Photo"
+  },
+  {
+    id: "d9",
+    category: "safety",
+    title: "Campus Security & 24/7 Escorts",
+    description: "Physical escort walking options, Blue Light intercom boxes, and guardian tracking apps.",
+    details: [
+      "Physical Walking Escorts: Call 215-898-WALK. A uniformed Penn Public Safety officer will walk Gabby to any location near campus 24/7.",
+      "Blue Light Phones: Strategically located around block margins. Touch the speaker button to contact Penn Police dispatched directly.",
+      "Penn Guardian App: Live GPS-sharing security software that triggers instant dispatcher location alerts during urgent calls."
+    ],
+    location: "Division of Public Safety (4040 Chestnut St)",
+    linkText: "Download Penn Guardian App"
+  },
+  {
+    id: "d10",
+    category: "packages",
+    title: "Packages & Quad Mailroom Layout",
+    description: "Mailing address formats, Quad package rooms, and crucial pre-arrival shipping rules.",
+    details: [
+      "Mailing Address: Gabby, Room [Room No], Ware College House, 3700 Spruce Street, Philadelphia, PA 19104-6022.",
+      "Quad Package Room: Centrally operated parcel room located in lower Quad level. Take the barcode pickup notification details and Penn ID.",
+      "Pre-Arrival Windows: Mailroom is closed to pre-shipments prior to August 1, 2026 due to extreme storage space limitations."
+    ],
+    location: "Quad Package Room (Lower Quad Level)",
+    linkText: "Review Shipping Regulations"
+  },
+  {
+    id: "d11",
+    category: "transportation",
+    title: "Campus Transportation & Shuttles",
+    description: "SEPTA regional rails, campus shuttle networks, and travel coordinates from Philadelphia Intl Airport.",
+    details: [
+      "Penn Transit Shuttle: Highly popular free door-to-door shuttle buses operating across campus boundaries after 6:00 PM.",
+      "SEPTA Trolleys: Under-street routes intersecting Spruce with direct fast transit into Center City Philadelphia.",
+      "Airport Access (PHL): Take the SEPTA Airport Line regional train from PHL terminals directly to Penn Medicine Station (Penn's edge)."
+    ],
+    location: "Penn Medicine Station / Spruce St margin",
+    linkText: "View Interactive Transit Map"
+  },
+  {
+    id: "d12",
+    category: "resources",
+    title: "Houston Hall Resources & Advisors",
+    description: "Freshman support desks, career assistance, libraries, and central administrative advisors.",
+    details: [
+      "Weigle Information Commons (WIC): Situated in Van Pelt Library. High-intensity study booths, collaborative zones, and media gear.",
+      "College House Deans: Professional academic advising teams located on the primary levels of Ware College House for course checks.",
+      "VPUL Administrative Help: Guidance for mental wellness support, student group funding, extracurricular clubs, and safety."
+    ],
+    location: "Houston Hall Central (3417 Spruce St)",
+    linkText: "Schedule Advising Appointment"
+  },
+  {
+    id: "d13",
+    category: "admissions",
+    title: "Admissions & Accepted Student Tasks",
+    description: "Final class transcripts submissions, high school graduation certifications, and initial profile completion.",
+    details: [
+      "Final High School Transcripts: Official final high school grades must be transmitted to Penn Admissions directly from registrar before July 1.",
+      "Profile Completion: Log into the Penn admissions checklist portal to certify enrollment deposits and upload code-of-conduct paperwork.",
+      "Family Portal Access: Sign Adrian up for the UPenn Parent Association newsletter to receive official schedules and safety newsletters."
+    ],
+    location: "Admissions Office (Claudia Cohen Hall)",
+    linkText: "Penn Admissions Portal"
   }
 ];

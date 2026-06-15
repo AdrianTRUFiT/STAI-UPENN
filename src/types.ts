@@ -54,12 +54,66 @@ export interface ChatMessage {
   createdAt: string;
 }
 
+export interface FamilyPlanningItem {
+  id: string;
+  milestoneId: string;
+  title: string;
+  notes?: string;
+  purchaseNeeded: boolean;
+  assignedTo: "student" | "parent" | "both";
+  dueDate: string;
+  status: "completed" | "pending" | "in_progress";
+  attachment?: string;
+}
+
+export interface TravelItem {
+  id: string;
+  type: "flight" | "hotel" | "train" | "rental_car" | "rideshare_transit";
+  title: string;
+  estimatedCost: number;
+  status: "comparing" | "planned" | "booked";
+  confirmationNumber?: string;
+  deadlineDate?: string;
+  notes?: string;
+  startLocation?: string;
+  endLocation?: string;
+  mapDistanceTime?: string;
+}
+
 export interface DiscoverItem {
   id: string;
-  category: "dining" | "housing" | "maps" | "resources" | "safety";
+  category: string;
   title: string;
   description: string;
   details: string[];
   location?: string;
   linkText?: string;
 }
+
+export type ExpenseCategory = 
+  | "Travel"
+  | "Housing"
+  | "Food"
+  | "Room Setup"
+  | "School Supplies"
+  | "Technology"
+  | "Clothing"
+  | "Social / Lifestyle"
+  | "Gifts"
+  | "Emergency"
+  | "Other";
+
+export interface ExpenseItem {
+  id: string;
+  name: string;
+  category: ExpenseCategory;
+  amount: number;
+  date: string;
+  paidBy: "student" | "parent" | "both";
+  milestoneId?: string;
+  requiredOrOptional: "required" | "optional";
+  status: "spent" | "planned";
+  notes?: string;
+  receipt?: string;
+}
+
