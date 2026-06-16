@@ -1,6 +1,6 @@
 {
-  "name": "STAI => UPENN",
-  "description": "Mobile-first transition intelligence and coordination system for families transitioning to the University of Pennsylvania. Built with STAI-C guidance chatbot and STAI-D coordination dashboard.",
+  "name": "STAI@PENN",
+  "description": "Mobile-first transition intelligence and coordination system for families transitioning to the University of Pennsylvania. Built with STAI-C concierge and STAI-D dashboard.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

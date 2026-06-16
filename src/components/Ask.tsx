@@ -13,7 +13,7 @@ export default function Ask({ userRole, onSelectAction, onClose }: AskProps) {
     {
       id: "init-1",
       role: "model",
-      text: `Hi, I’m STAI-C your transition copilot. Ask me anything about UPenn move-in dates, packing lists, checklist clearances, or finances!`,
+      text: `Hi Gabby — welcome to STAI@PENN. I’m STAI-C, pronounced “Stacey,” your Penn transition concierge. Ask me anything about UPenn move-in dates, packing lists, checklist clearances, or finances!`,
       createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ]);

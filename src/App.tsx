@@ -25,8 +25,17 @@ import {
   Bell,
   AlertTriangle,
   X,
+  MessageSquare,
   Home,
-  Plane
+  School,
+  Heart,
+  CreditCard,
+  Car,
+  Package,
+  Users,
+  MapPin,
+  Menu,
+  Star
 } from "lucide-react";
 import { 
   UserRole, 
@@ -50,13 +59,40 @@ import {
 } from "./data";
 import Ask from "./components/Ask";
 import Ready from "./components/Ready";
-import CalendarView from "./components/CalendarView";
-import HousingView from "./components/HousingView";
 
 export default function App() {
   // Navigation State (READY center acts as the core dashboard)
-  const [activeTab, setActiveTab] = useState<"ask" | "ready" | "plan" | "discover" | "journey" | "travel" | "finances" | "calendar" | "housing">("journey");
+  const [activeTab, setActiveTab] = useState<"ask" | "ready" | "plan" | "discover" | "journey" | "travel" | "finances">("ready");
   
+  // Mobile Navigation Menu states
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [currentNavId, setCurrentNavId] = useState<string>("checklist");
+
+  useEffect(() => {
+    // Synchronize sidebar nav selection if activeTab changes from other triggers
+    if (activeTab === "ask") {
+      setCurrentNavId("ask");
+    } else if (activeTab === "ready") {
+      if (currentNavId !== "housing" && currentNavId !== "medical" && currentNavId !== "move-in" && currentNavId !== "checklist") {
+        setCurrentNavId("checklist");
+      }
+    } else if (activeTab === "plan") {
+      if (currentNavId !== "schedules" && currentNavId !== "dates") {
+        setCurrentNavId("dates");
+      }
+    } else if (activeTab === "discover") {
+      if (currentNavId !== "campus" && currentNavId !== "education" && currentNavId !== "orientation" && currentNavId !== "off-campus") {
+        setCurrentNavId("campus");
+      }
+    } else if (activeTab === "journey") {
+      setCurrentNavId("extracurricular");
+    } else if (activeTab === "travel") {
+      setCurrentNavId("transportation");
+    } else if (activeTab === "finances") {
+      setCurrentNavId("finance");
+    }
+  }, [activeTab]);
+
   // Chat Overlay State (STAI-C Stacey)
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -1070,70 +1106,66 @@ export default function App() {
   const nextMilestone = calendarEvents.find(e => !e.description.includes("Completed")) || calendarEvents[0];
 
   return (
-    <div className="min-h-screen md:h-screen bg-[#F5F5F7] text-[#1D1D1F] flex flex-col md:flex-row font-sans selection:bg-[#011F5B] selection:text-white antialiased md:overflow-hidden">
+    <div className="min-h-screen md:h-screen bg-[#F5F5F7] text-[#1D1D1F] flex flex-col md:flex-row font-sans selection:bg-[#011F5B] selection:text-white antialiased md:overflow-hidden pt-[56px] md:pt-0 relative animate-in fade-in duration-300">
       
+      {/* MOBILE FIXED HIGH-CONTRAST NAVY HEADER */}
+      <header className="fixed top-0 left-0 right-0 h-[56px] z-50 bg-[#011F5B] text-white flex items-center justify-between px-4 py-3 md:hidden shadow-md border-b border-blue-950 font-sans">
+        <div className="flex items-center gap-2">
+          {/* Menu Icon that toggles the sidebar */}
+          <button 
+            type="button"
+            onClick={() => setIsMobileSidebarOpen(prev => !prev)} 
+            className="p-1 px-1.5 hover:bg-white/10 rounded-lg transition text-white outline-hidden cursor-pointer flex items-center justify-center"
+            title="Toggle Menu"
+          >
+            <Menu className="w-5 h-5 text-white" />
+          </button>
+          
+          <span className="font-extrabold tracking-tight text-white text-sm font-sans uppercase">
+            STAI@PENN
+          </span>
+        </div>
+        
+        {/* Ask STAI-C Button */}
+        <button
+          type="button"
+          onClick={() => {
+            setActiveTab("ask");
+            setIsChatOpen(true);
+            setIsMobileSidebarOpen(false);
+          }}
+          className="bg-white text-[#011F5B] hover:bg-slate-50 active:scale-95 text-[11px] font-extrabold px-3 py-1.5 rounded-lg transition duration-150 flex items-center gap-1 cursor-pointer shadow-xs font-sans"
+        >
+          <Sparkles className="w-3 h-3 text-amber-500 animate-pulse" />
+          <span>Ask STAI-C</span>
+        </button>
+      </header>
+
       {/* LEFT SIDEBAR NAVIGATION */}
-      <aside className="w-full md:w-76 bg-white border-b md:border-b-0 md:border-r border-gray-200/85 flex flex-col shrink-0 md:h-full md:overflow-y-auto">
+      <aside className={`w-full md:w-76 bg-white border-b md:border-b-0 md:border-r border-gray-200/85 flex flex-col shrink-0 md:h-full md:overflow-y-auto ${
+        isMobileSidebarOpen ? "block" : "hidden md:flex"
+      }`}>
         
         {/* Banner with UPenn colors */}
-        <div className="p-5 border-b border-gray-100 flex flex-col gap-2">
+        <div className="p-5 border-b border-gray-150 flex flex-col gap-2">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 bg-[#990000] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-xs ring-2 ring-[#011F5B]/10">
               U
             </div>
             <div>
-              <h1 className="font-bold text-lg tracking-tight text-[#011F5B] flex items-center gap-1.5">
-                STAI <span className="text-gray-400 font-light">⇒</span> UPENN
+              <h1 className="font-extrabold text-lg tracking-tight text-[#011F5B] flex items-center gap-1.5 font-sans">
+                STAI@PENN
               </h1>
-              <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">
-                Transition Intelligence
-              </p>
             </div>
           </div>
           
-          <div className="mt-2 text-xs text-gray-500 leading-normal flex items-center gap-1.5 bg-slate-50 p-2 rounded-lg border border-gray-100">
+          <div className="mt-1 text-xs text-slate-500 leading-normal flex items-center gap-1.5 bg-slate-50 p-2 rounded-lg border border-gray-200">
             <div className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </div>
-            <span>Class of 2030 • Ware College House</span>
+            <span className="font-medium text-[11px] text-slate-600">Class of 2030 • Ware College House</span>
           </div>
-        </div>
-
-        {/* Dynamic Persona Selection Trigger (Parent / Student switch) */}
-        <div className="p-4 border-b border-gray-50 bg-slate-50/40">
-          <span className="text-[9px] font-bold text-gray-450 tracking-widest uppercase block mb-2 px-1">
-            Toggle Perspective
-          </span>
-          <div className="flex bg-gray-200/80 p-0.5 rounded-lg border border-gray-300/40">
-            <button
-              onClick={() => setUserRole("student")}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-xs font-semibold rounded-md transition ${
-                userRole === "student"
-                  ? "bg-white text-slate-900 shadow-xs"
-                  : "text-gray-500 hover:text-gray-900"
-              }`}
-            >
-              <User className="w-3.5 h-3.5 text-purple-650" />
-              <span>Gabby (Student)</span>
-            </button>
-            <button
-              onClick={() => setUserRole("parent")}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 text-xs font-semibold rounded-md transition ${
-                userRole === "parent"
-                  ? "bg-white text-slate-900 shadow-xs"
-                  : "text-gray-500 hover:text-gray-900"
-              }`}
-            >
-              <UserCheck className="w-3.5 h-3.5 text-teal-650" />
-              <span>Adrian (Parent)</span>
-            </button>
-          </div>
-          <p className="text-[10px] text-gray-400 mt-1.5 text-center italic">
-            {userRole === "student" 
-              ? "🎯 Managing independence & lecture locations" 
-              : "🗺️ Distance coaching & administrative protection"}
-          </p>
         </div>
 
         {/* STAI Live Transition Alerts Widget */}
@@ -1167,155 +1199,80 @@ export default function App() {
         </div>
 
         {/* Tab Navigation */}
-        <nav className="flex-1 p-4 space-y-1.5">
-          <button
-            onClick={() => setActiveTab("journey")}
-            className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition ${
-              activeTab === "journey"
-                ? "bg-[#011F5B] text-white shadow-xs"
-                : "text-gray-600 hover:bg-slate-50 hover:text-slate-950"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <TrendingUp className="w-4 h-4 shrink-0" />
-              <span>Journey Timeline</span>
-            </div>
-            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">
-              STAI-D
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("calendar")}
-            className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition ${
-              activeTab === "calendar"
-                ? "bg-[#011F5B] text-white shadow-xs"
-                : "text-gray-600 hover:bg-slate-50 hover:text-slate-950"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <Calendar className="w-4 h-4 shrink-0" />
-              <span>Calendar</span>
-            </div>
-            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">
-              Month
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("finances")}
-            className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition ${
-              activeTab === "finances"
-                ? "bg-[#011F5B] text-white shadow-xs"
-                : "text-gray-600 hover:bg-slate-50 hover:text-slate-950"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <DollarSign className="w-4 h-4 shrink-0 text-emerald-500" />
-              <span>Finances</span>
-            </div>
-            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">
-              Ledger
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("travel")}
-            className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition ${
-              activeTab === "travel"
-                ? "bg-[#011F5B] text-white shadow-xs"
-                : "text-gray-600 hover:bg-slate-50 hover:text-slate-950"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <Plane className="w-4 h-4 shrink-0 text-blue-500" />
-              <span>Travel</span>
-            </div>
-            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 font-bold">
-              Logs
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("housing")}
-            className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition ${
-              activeTab === "housing"
-                ? "bg-[#011F5B] text-white shadow-xs"
-                : "text-gray-600 hover:bg-slate-50 hover:text-slate-950"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <Home className="w-4 h-4 shrink-0 text-amber-600" />
-              <span>Housing</span>
-            </div>
-            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">
-              Dorm
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab("ask");
-              setIsChatOpen(true);
-            }}
-            className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition ${
-              activeTab === "ask"
-                ? "bg-[#011F5B] text-white shadow-xs"
-                : "text-gray-600 hover:bg-slate-50 hover:text-slate-950"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-4 h-4 shrink-0 text-red-500" />
-              <span>Ask STAI-C</span>
-            </div>
-            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-white/25 text-red-700 font-bold">
-              Active
-            </span>
-          </button>
+        <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto max-h-[calc(100vh-280px)] md:max-h-none scrollbar-thin">
+          {[
+            { id: "ask", label: "Ask STAI-C", icon: MessageSquare, tab: "ask" as const },
+            { id: "checklist", label: "Checklist", icon: CheckSquare, tab: "ready" as const },
+            { id: "dates", label: "Important Dates", icon: Calendar, tab: "plan" as const },
+            { id: "campus", label: "Campus Life", icon: School, tab: "discover" as const, subCat: "all" },
+            { id: "education", label: "Education", icon: BookOpen, tab: "discover" as const, subCat: "all" },
+            { id: "housing", label: "Housing", icon: Home, tab: "ready" as const },
+            { id: "medical", label: "Medical", icon: Heart, tab: "ready" as const },
+            { id: "finance", label: "Finance", icon: CreditCard, tab: "finances" as const },
+            { id: "transportation", label: "Transportation", icon: Car, tab: "travel" as const },
+            { id: "orientation", label: "Orientation", icon: Compass, tab: "discover" as const, subCat: "orientation" },
+            { id: "move-in", label: "Move-In", icon: Package, tab: "ready" as const },
+            { id: "extracurricular", label: "Extracurricular", icon: Star, tab: "journey" as const },
+            { id: "schedules", label: "Schedules", icon: Clock, tab: "plan" as const },
+            { id: "off-campus", label: "Off-Campus", icon: MapPin, tab: "discover" as const, subCat: "safety" },
+            { id: "emergencies", label: "Emergencies", icon: AlertTriangle, tab: "ready" as const, action: "alerts" },
+          ].map((item) => {
+            const isActive = currentNavId === item.id;
+            const IconComponent = item.icon;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => {
+                  setCurrentNavId(item.id);
+                  if (item.action === "alerts") {
+                    setIsAlertModalOpen(true);
+                  } else {
+                    setActiveTab(item.tab);
+                    if (item.subCat) {
+                      setDiscoverCat(item.subCat);
+                    }
+                  }
+                  setIsMobileSidebarOpen(false);
+                }}
+                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-r-xl text-xs font-semibold relative transition-all duration-200 cursor-pointer overflow-hidden group pl-5 ${
+                  isActive
+                    ? "bg-[#011F5B] text-white font-bold shadow-xs"
+                    : "text-gray-600 hover:bg-[#011F5B]/90 hover:text-white"
+                }`}
+              >
+                {/* UPENN red left accent bar */}
+                <div 
+                  className={`absolute left-0 top-0 bottom-0 w-1 bg-[#990000] transition-all duration-200 ${
+                    isActive 
+                      ? "h-full opacity-100 scale-y-100" 
+                      : "h-0 opacity-0 scale-y-0 group-hover:h-full group-hover:opacity-100 group-hover:scale-y-100"
+                  }`} 
+                />
+                
+                <IconComponent className={`w-4 h-4 shrink-0 transition-colors duration-200 ${
+                  isActive ? "text-white" : "text-gray-400 group-hover:text-white"
+                }`} />                 <span className="truncate">{item.label}</span>
+              </button>
+            );
+          })}
         </nav>
-
-        {/* Interactive Coordination Badge at bottom of sidebar */}
-        <div className="p-4 m-4 bg-slate-900 text-white rounded-2xl shadow-md border border-slate-800">
-          <div className="text-[9px] font-bold text-[#990000] uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            STAI-D Status Sync
-          </div>
-          <div className="space-y-1.5">
-            <div className="font-bold text-xs tracking-tight">Parent + Student Linked</div>
-            <p className="text-[10px] text-slate-300 leading-normal">
-              Shared workspace is currently active. Adrian's financial inputs and Gabby's scheduling milestones are co-synchronized.
-            </p>
-          </div>
-        </div>
       </aside>
 
       {/* MAIN CONTENT AREA */}
       <main className="flex-1 flex flex-col min-w-0 md:h-full overflow-hidden">
         
         {/* TOP STATUS HERO BAR (Progress tracking across the transition) */}
-        <section className="bg-white border-b border-gray-200/85 p-6 md:p-8 flex flex-col justify-center shrink-0">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-4">
+        <section className="bg-white border-b border-gray-200 p-6 md:p-8 flex flex-col justify-center shrink-0">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-4 font-sans">
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-[10px] bg-[#990000]/10 text-[#990000] font-bold uppercase tracking-widest px-2 py-0.5 rounded">
-                  UPenn Transition Intelligence
-                </span>
-                <span className="text-[10px] bg-[#011F5B]/10 text-[#011F5B] font-bold uppercase tracking-widest px-2 py-0.5 rounded">
-                  STAI-D Ecosystem
-                </span>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Are we ready?</h2>
-              <p className="text-sm text-gray-500 mt-1">
-                Next Landmark: <span className="text-[#011F5B] font-bold">{nextMilestone ? nextMilestone.title : "Move-in and NSO"}</span> ({nextMilestone ? nextMilestone.date : ""})
-              </p>
+              <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">Welcome back, Gabby</h2>
+              <p className="text-xs text-slate-500 mt-1">Strive. Achieve. Prepare.</p>
             </div>
             <div className="text-left sm:text-right">
               <div className="text-4xl font-black text-[#011F5B] font-mono leading-none flex items-baseline sm:justify-end gap-1">
                 {overallReadyScore}%
-                <span className="text-xs text-gray-400 font-bold uppercase">Ready</span>
-              </div>
-              <div className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">
-                Based on 7 crucial preparation hubs
+                <span className="text-xs text-slate-400 font-bold uppercase">Ready</span>
               </div>
               <div 
                 onClick={() => setIsAlertModalOpen(true)}
@@ -1327,9 +1284,9 @@ export default function App() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-red-650"></span>
                   </span>
-                  <span className="text-red-700">High: {highAlertCount}</span>
+                  <span className="text-red-700 font-sans">High: {highAlertCount}</span>
                 </div>
-                <div className="h-3 w-[1px] bg-rose-200" />
+                <div className="h-3 w-[1px] bg-rose-150" />
                 <div className="flex items-center gap-1">
                   <span className="text-[#011F5B]">Low: {lowAlertCount}</span>
                 </div>
@@ -2031,7 +1988,7 @@ export default function App() {
               <div className="bg-white rounded-2xl border border-gray-150 p-5 shadow-xs">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
-                    <h3 className="font-bold text-gray-900 text-base">🏫 STAI ⇒ Discover UPenn Knowledge Base</h3>
+                    <h3 className="font-bold text-gray-900 text-base">🏫 STAI@PENN • Discover Penn Knowledge Base</h3>
                     <p className="text-xs text-gray-500">Curated logistical profiles for freshers. Type questions below or search parameters.</p>
                   </div>
 
@@ -2697,7 +2654,7 @@ export default function App() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg flex items-center gap-2 font-sans">
-                      🚇 STAI-D ⇒ Travel Coordination Hub
+                      🚇 STAI-D • Travel Coordination Hub
                     </h3>
                     <p className="text-xs text-gray-500 mt-0.5 font-sans">
                       Coordinate outbound trips, hotel reservations, trains, rideshares, maps, estimated budgets, and confirmations.
@@ -3082,7 +3039,7 @@ export default function App() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 font-sans">
                   <div>
                     <h3 className="font-bold text-gray-900 text-lg flex items-center gap-2">
-                      💰 STAI-D ⇒ Transition Finances Hub
+                      💰 STAI-D • Transition Finances Hub
                     </h3>
                     <p className="text-xs text-gray-500 mt-0.5">
                       Co-evaluate upcoming school supplies, lodging comparisons, available cash buffer, and student budget awareness.
@@ -3324,7 +3281,7 @@ export default function App() {
                         </div>
                         <div>
                           <h4 className="font-extrabold text-slate-900 text-sm tracking-wide uppercase">
-                            Student Financial Copilot ⇒ Can I Afford This?
+                            Student Financial Copilot • Can I Afford This?
                           </h4>
                           <p className="text-[10px] text-gray-400">
                             Evaluate whether an item cost fits comfortably within your current available cash buffer.
@@ -3692,54 +3649,26 @@ export default function App() {
             </div>
           )}
 
-          {activeTab === "calendar" && (
-            <CalendarView 
-              calendarEvents={calendarEvents}
-              tasks={tasks}
-              familyPlanningItems={familyPlanningItems}
-              expenses={expenses}
-              travelItems={[]}
-              setActiveTab={setActiveTab}
-            />
-          )}
-
-          {activeTab === "housing" && (
-            <HousingView 
-              userRole={userRole}
-              tasks={tasks}
-              onToggleTask={toggleTaskCompletion}
-              purchases={purchases}
-              onAddPurchase={handleAddPurchaseDirect}
-              documents={documents}
-              onAddDocument={handleAddDocumentDirect}
-            />
-          )}
-
         </div>
 
         {/* BOTTOM GLOBAL FLOATING DOCKET (Reduced Uncertainty Assistant Trigger) */}
-        <section className="bg-white border-t border-gray-150 p-4 shrink-0 shadow-lg sticky bottom-0 z-40">
-          <div className="max-w-xl mx-auto flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-[#011F5B] flex items-center justify-center text-[#990000] shrink-0 border border-red-200 bg-red-50">
-              <Sparkles className="w-4 h-4 animate-pulse" />
-            </div>
-            
-            <div className="flex-1 text-xs">
-              <span className="text-[9px] text-[#990000] font-black uppercase tracking-wider block">
-                Quick Ask (Instant Ask Layer)
+        <section className="bg-white border-t border-gray-200 px-6 py-3.5 shrink-0 relative">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 font-sans">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[11px] font-semibold text-slate-500 tracking-wide uppercase">
+                STAI@PENN Copilot Active
               </span>
-              <p className="text-gray-500 line-clamp-1 font-medium">
-                Query STAI-C instantly regarding any transition parameters.
-              </p>
             </div>
 
             <button
               onClick={() => {
                 setIsChatOpen(true);
               }}
-              className="px-4 py-2 bg-[#011F5B] hover:bg-[#001743] hover:scale-[1.02] active:scale-98 text-white rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer shadow-xs"
+              className="px-4.5 py-2 bg-[#011F5B] hover:bg-[#001743] hover:scale-[1.02] active:scale-98 text-white rounded-xl text-xs font-bold transition-all duration-150 cursor-pointer shadow-xs flex items-center gap-1.5"
             >
-              Ask STAI-C
+              <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+              <span>Ask STAI-C</span>
             </button>
           </div>
         </section>
